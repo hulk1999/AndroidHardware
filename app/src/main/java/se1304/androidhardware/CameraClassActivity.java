@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -14,6 +15,7 @@ public class CameraClassActivity extends AppCompatActivity {
 
     private final int CAPTURE_REQUEST = 123;
     private ImageView imvTaken;
+    private String outputPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +26,9 @@ public class CameraClassActivity extends AppCompatActivity {
     }
 
     public void clickToCapture(View view) {
+        outputPath = Environment.getExternalStorageDirectory() + "/PRM391/img.jpg";
         Intent intent = new Intent(this, CameraClassCapturingActivity.class);
+        intent.putExtra("outputPath", outputPath);
         startActivityForResult(intent, CAPTURE_REQUEST);
     }
 
@@ -32,9 +36,8 @@ public class CameraClassActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if ((requestCode == CAPTURE_REQUEST) && (resultCode == RESULT_OK)){
-            byte[] byteArrImg = data.getByteArrayExtra("byteArrImg");
-            Bitmap bmpTaken = BitmapFactory.decodeByteArray(byteArrImg, 0, byteArrImg.length);
-            imvTaken.setImageBitmap(bmpTaken);
+            Bitmap bitmap = BitmapFactory.decodeFile(outputPath);
+            imvTaken.setImageBitmap(bitmap);
         }
     }
 }

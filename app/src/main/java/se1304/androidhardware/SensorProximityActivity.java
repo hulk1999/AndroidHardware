@@ -2,6 +2,7 @@ package se1304.androidhardware;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -43,5 +44,6 @@ public class SensorProximityActivity extends AppCompatActivity implements Sensor
     public void onSensorChanged(SensorEvent event){
         TextView txtState = findViewById(R.id.txtState);
         txtState.setText(event.values[0] == 0 ? "Near" : "Away");
+        txtState.setBackgroundColor(event.values[0] == 0 ? Color.RED : Color.GREEN);
     }
 }

@@ -49,4 +49,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void clickToCameraVideo(View view) {
+        Intent intent = new Intent(this, CameraVideoActivity.class);
+        startActivity(intent);
+    }
 }

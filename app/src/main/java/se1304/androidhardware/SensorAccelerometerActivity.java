@@ -7,14 +7,14 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
+import android.util.Log;
 import android.widget.TextView;
+import android.view.ViewGroup.LayoutParams;
 
 public class SensorAccelerometerActivity extends AppCompatActivity implements SensorEventListener {
 
-    private float mLastX, mLastY, mLastZ;
-    private boolean bInit;
+    private float[] lastState;
+    private boolean isInitialized;
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private final float NOISE = 2.0f;
@@ -24,7 +24,7 @@ public class SensorAccelerometerActivity extends AppCompatActivity implements Se
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensor_accelerometer);
 
-        bInit = false;
+        isInitialized = false;
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     }
@@ -41,39 +41,35 @@ public class SensorAccelerometerActivity extends AppCompatActivity implements Se
         sensorManager.unregisterListener(this);
     }
 
+    private int max(int num1, int num2){
+        return num1 < num2 ? num2 : num1;
+    }
+
     @Override
     public void onSensorChanged(SensorEvent event) {
-        TextView txtXAxis = findViewById(R.id.txtXAxis);
-        TextView txtYAxis = findViewById(R.id.txtYAxis);
-        TextView txtZAxis = findViewById(R.id.txtZAxis);
 
-        float x = event.values[0];
-        float y = event.values[1];
-        float z = event.values[2];
+        TextView[] txtAccelerationArr = {findViewById(R.id.txtXAxisAcceleration), findViewById(R.id.txtYAxisAcceleration), findViewById(R.id.txtZAxisAcceleration)};
+        TextView[] txtArr = {findViewById(R.id.txtXAxis), findViewById(R.id.txtYAxis), findViewById(R.id.txtZAxis)};
+        float[] currentState = {event.values[0], event.values[1], event.values[2]};
 
-        if (!bInit){
-            mLastX = x;
-            mLastY = y;
-            mLastZ = z;
-            txtXAxis.setText("0.0");
-            txtYAxis.setText("0.0");
-            txtZAxis.setText("0.0");
-            bInit = true;
+        if (!isInitialized){
+            lastState = currentState;
+            isInitialized = true;
         } else {
-            float deltaX = mLastX - x;
-            float deltaY = mLastY - y;
-            float deltaZ = mLastZ - z;
 
-            deltaX = (deltaX < NOISE) ? 0.0f : deltaX;
-            deltaY = (deltaY < NOISE) ? 0.0f : deltaY;
-            deltaZ = (deltaZ < NOISE) ? 0.0f : deltaZ;
-            mLastX = x;
-            mLastY = y;
-            mLastZ = z;
+            float[] stateChanged = new float[3];
+            for (int i = 0; i <= 2; i++){
+                stateChanged[i] = lastState[i]-currentState[i] < NOISE ? 0.0f : lastState[i]-currentState[i];
+            }
+            lastState = currentState;
 
-            txtXAxis.setText(deltaX + "");
-            txtYAxis.setText(deltaY + "");
-            txtZAxis.setText(deltaZ + "");
+            for (int i = 0; i <= 2; i++){
+                txtAccelerationArr[i].setText("Acceleration: " + currentState[i] + " m/s^2");
+                txtArr[i].setText(String.format ("%.1f", stateChanged[i]));
+                LayoutParams layoutParams = txtArr[i].getLayoutParams();
+                layoutParams.width = max((int) (stateChanged[i]/20*760), 60);
+                txtArr[i].setLayoutParams(layoutParams);
+            }
         }
     }
 

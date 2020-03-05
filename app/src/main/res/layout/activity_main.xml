@@ -59,12 +59,17 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Open with Intent"
+        android:text="Capture with Intent"
         android:onClick="clickToCameraIntent"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Open with Camera Class"
+        android:text="Capture with Camera Class"
         android:onClick="clickToCameraClass"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Record with Intent"
+        android:onClick="clickToCameraVideo"/>
 
 </LinearLayout>
