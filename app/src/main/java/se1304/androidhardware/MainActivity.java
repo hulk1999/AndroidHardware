@@ -14,7 +14,29 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void clickToSensors(View view) {
+    public void clickToListSensors(View view) {
+        Intent intent = new Intent(this, SensorListActivity.class);
+        startActivity(intent);
+    }
+
+    public void clickToSensorBarometer(View view) {
+        Intent intent = new Intent(this, SensorBarometerActivity.class);
+        startActivity(intent);
+    }
+
+    public void clickToCompass(View view) {
+        Intent intent = new Intent(this, SensorCompassActivity.class);
+        startActivity(intent);
+    }
+
+    public void clickToAccelerometer(View view) {
+        Intent intent = new Intent(this, SensorAccelerometerActivity.class);
+        startActivity(intent);
+    }
+
+    public void clickToProximity(View view) {
+        Intent intent = new Intent(this, SensorProximityActivity.class);
+        startActivity(intent);
     }
 
     public void clickToCameraIntent(View view) {
@@ -26,4 +48,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CameraClassActivity.class);
         startActivity(intent);
     }
+
 }
