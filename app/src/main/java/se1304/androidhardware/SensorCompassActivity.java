@@ -32,6 +32,7 @@ public class SensorCompassActivity extends AppCompatActivity implements SensorEv
     @Override
     protected void onResume() {
         super.onResume();
+        // get compass & register this activity as listener
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
         sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_GAME);
     }
@@ -44,9 +45,11 @@ public class SensorCompassActivity extends AppCompatActivity implements SensorEv
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+        // change degree textview when compass value changed
         float degree = Math.round(event.values[0]);
         txtDegree.setText("Heading: " + degree + " degrees");
 
+        // change compass image rotation when compass value changed
         RotateAnimation ra = new RotateAnimation(currentDegree, -degree,
                 Animation.RELATIVE_TO_SELF, 0.5f,
                 Animation.RELATIVE_TO_SELF, 0.5f);

@@ -16,8 +16,11 @@ public class SensorListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensor_list);
 
+        // list sensors using SensorManager
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         List<Sensor> sensorList = sensorManager.getSensorList(Sensor.TYPE_ALL);
+
+        // build list of sensors as string
         StringBuilder sbrSensorList  = new StringBuilder();
         int i = 0;
         for (Sensor s : sensorList){
@@ -26,6 +29,7 @@ public class SensorListActivity extends AppCompatActivity {
             sbrSensorList.append("      Version: " + s.getVersion() + "\n");
         }
 
+        // set sensor list to textview
         TextView txtSensorList = findViewById(R.id.txtSensorList);
         txtSensorList.setText(sbrSensorList);
     }

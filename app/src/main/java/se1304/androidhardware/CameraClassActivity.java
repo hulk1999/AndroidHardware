@@ -26,7 +26,11 @@ public class CameraClassActivity extends AppCompatActivity {
     }
 
     public void clickToCapture(View view) {
+
+        // provide path to save image
         outputPath = Environment.getExternalStorageDirectory() + "/PRM391/img.jpg";
+
+        // start CameraClassCapturingActivity to capture image & save
         Intent intent = new Intent(this, CameraClassCapturingActivity.class);
         intent.putExtra("outputPath", outputPath);
         startActivityForResult(intent, CAPTURE_REQUEST);
@@ -36,6 +40,7 @@ public class CameraClassActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if ((requestCode == CAPTURE_REQUEST) && (resultCode == RESULT_OK)){
+            // get saved image & load to layout
             Bitmap bitmap = BitmapFactory.decodeFile(outputPath);
             imvTaken.setImageBitmap(bitmap);
         }

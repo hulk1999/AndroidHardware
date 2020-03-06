@@ -7,17 +7,18 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 import android.view.ViewGroup.LayoutParams;
 
 public class SensorAccelerometerActivity extends AppCompatActivity implements SensorEventListener {
 
     private float[] lastState;
+    TextView[] txtAccelerationArr;
+    TextView[] txtArr;
     private boolean isInitialized;
     private SensorManager sensorManager;
     private Sensor accelerometer;
-    private final float NOISE = 2.0f;
+    private final float NOISE = 2.0f;  // maximum ignored change on acceleration
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +26,22 @@ public class SensorAccelerometerActivity extends AppCompatActivity implements Se
         setContentView(R.layout.activity_sensor_accelerometer);
 
         isInitialized = false;
+        txtAccelerationArr = new TextView[3];
+        txtAccelerationArr[0] = findViewById(R.id.txtXAxisAcceleration);
+        txtAccelerationArr[1] = findViewById(R.id.txtYAxisAcceleration);
+        txtAccelerationArr[2] =  findViewById(R.id.txtZAxisAcceleration);
+        txtArr = new TextView[3];
+        txtArr[0] = findViewById(R.id.txtXAxis);
+        txtArr[1] = findViewById(R.id.txtYAxis);
+        txtArr[2] = findViewById(R.id.txtZAxis);
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        // get accelerometer & register this activity as listener
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
@@ -48,21 +58,22 @@ public class SensorAccelerometerActivity extends AppCompatActivity implements Se
     @Override
     public void onSensorChanged(SensorEvent event) {
 
-        TextView[] txtAccelerationArr = {findViewById(R.id.txtXAxisAcceleration), findViewById(R.id.txtYAxisAcceleration), findViewById(R.id.txtZAxisAcceleration)};
-        TextView[] txtArr = {findViewById(R.id.txtXAxis), findViewById(R.id.txtYAxis), findViewById(R.id.txtZAxis)};
+        // get current acceleration of axes
         float[] currentState = {event.values[0], event.values[1], event.values[2]};
 
-        if (!isInitialized){
+        if (!isInitialized){  // first call
             lastState = currentState;
             isInitialized = true;
         } else {
 
+            // get amount of acceleration change on each axis
             float[] stateChanged = new float[3];
             for (int i = 0; i <= 2; i++){
                 stateChanged[i] = lastState[i]-currentState[i] < NOISE ? 0.0f : lastState[i]-currentState[i];
             }
             lastState = currentState;
 
+            // change text and width of textviews according to how much acceleration changed
             for (int i = 0; i <= 2; i++){
                 txtAccelerationArr[i].setText("Acceleration: " + currentState[i] + " m/s^2");
                 txtArr[i].setText(String.format ("%.1f", stateChanged[i]));

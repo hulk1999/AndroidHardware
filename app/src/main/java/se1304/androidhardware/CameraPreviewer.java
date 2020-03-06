@@ -7,6 +7,7 @@ import android.view.SurfaceView;
 
 import java.io.IOException;
 
+// provide a SurfaceView for Previewing camera before capturing
 public class CameraPreviewer extends SurfaceView implements SurfaceHolder.Callback {
 
     private Camera camera;

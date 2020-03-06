@@ -24,6 +24,7 @@ public class SensorBarometerActivity extends AppCompatActivity implements Sensor
     @Override
     protected void onResume(){
         super.onResume();
+        // get barometer & register this activity as listener
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
         sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI);
     }
@@ -41,6 +42,7 @@ public class SensorBarometerActivity extends AppCompatActivity implements Sensor
 
     @Override
     public void onSensorChanged(SensorEvent event){
+        // change value of textview when sensor value changed
         TextView txtValue = findViewById(R.id.txtValue);
         txtValue.setText(event.values[0] + "");
     }

@@ -25,6 +25,7 @@ public class SensorProximityActivity extends AppCompatActivity implements Sensor
     @Override
     protected void onResume(){
         super.onResume();
+        // get proximity & register this activity as listener
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
         sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI);
     }
@@ -42,6 +43,7 @@ public class SensorProximityActivity extends AppCompatActivity implements Sensor
 
     @Override
     public void onSensorChanged(SensorEvent event){
+        // change color and text of textview according to sensor value
         TextView txtState = findViewById(R.id.txtState);
         txtState.setText(event.values[0] == 0 ? "Near" : "Away");
         txtState.setBackgroundColor(event.values[0] == 0 ? Color.RED : Color.GREEN);

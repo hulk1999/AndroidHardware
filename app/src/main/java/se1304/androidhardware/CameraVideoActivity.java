@@ -25,9 +25,12 @@ public class CameraVideoActivity extends AppCompatActivity{
     }
 
     public void clickToRecord(View view) {
+
+        // provide path to save image
         File outputFile = new File(Environment.getExternalStorageDirectory() + "/PRM391/vid.mp4");
         outputUri = Uri.fromFile(outputFile);
 
+        // create intent & start activity to capture video
         Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, outputUri);
@@ -38,6 +41,7 @@ public class CameraVideoActivity extends AppCompatActivity{
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if ((requestCode == RECORD_REQUEST) && (resultCode == RESULT_OK)){
+            // get saved video & load to layout
             VideoView vivTaken = findViewById(R.id.vivTaken);
             vivTaken.setVideoPath(outputUri.getPath());
             vivTaken.start();
