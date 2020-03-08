@@ -1,4 +1,4 @@
-package se1304.androidhardware;
+package se1304.androidhardware.camera;
 
 import android.content.Context;
 import android.hardware.Camera;

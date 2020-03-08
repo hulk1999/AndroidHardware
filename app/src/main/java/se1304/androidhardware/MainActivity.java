@@ -6,6 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import se1304.androidhardware.bluetooth.BluetoothActivity;
+import se1304.androidhardware.camera.CameraClassActivity;
+import se1304.androidhardware.camera.CameraIntentActivity;
+import se1304.androidhardware.camera.CameraVideoActivity;
+import se1304.androidhardware.sensors.SensorAccelerometerActivity;
+import se1304.androidhardware.sensors.SensorBarometerActivity;
+import se1304.androidhardware.sensors.SensorCompassActivity;
+import se1304.androidhardware.sensors.SensorListActivity;
+import se1304.androidhardware.sensors.SensorProximityActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -36,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickToProximity(View view) {
         Intent intent = new Intent(this, SensorProximityActivity.class);
+        startActivity(intent);
+    }
+
+    public void clickToBluetooth(View view){
+        Intent intent = new Intent(this, BluetoothActivity.class);
         startActivity(intent);
     }
 

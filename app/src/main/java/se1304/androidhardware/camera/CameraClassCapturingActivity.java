@@ -1,4 +1,4 @@
-package se1304.androidhardware;
+package se1304.androidhardware.camera;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import java.io.FileOutputStream;
+
+import se1304.androidhardware.R;
 
 public class CameraClassCapturingActivity extends AppCompatActivity {
 
@@ -60,7 +62,7 @@ public class CameraClassCapturingActivity extends AppCompatActivity {
 
                 // save image as jpg
                 FileOutputStream fos = new FileOutputStream(outputPath);
-                bmpTaken.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                bmpTaken.compress(Bitmap.CompressFormat.JPEG, 50, fos);
 
                 fos.flush();
                 fos.close();

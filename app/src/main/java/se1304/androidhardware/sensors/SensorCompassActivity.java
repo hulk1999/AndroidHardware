@@ -1,4 +1,4 @@
-package se1304.androidhardware;
+package se1304.androidhardware.sensors;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,8 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import se1304.androidhardware.R;
 
 public class SensorCompassActivity extends AppCompatActivity implements SensorEventListener {
 

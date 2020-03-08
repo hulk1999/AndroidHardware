@@ -1,4 +1,4 @@
-package se1304.androidhardware;
+package se1304.androidhardware.sensors;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import se1304.androidhardware.R;
 
 public class SensorProximityActivity extends AppCompatActivity implements SensorEventListener {
 

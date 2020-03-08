@@ -1,4 +1,4 @@
-package se1304.androidhardware;
+package se1304.androidhardware.camera;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.VideoView;
 
 import java.io.File;
+
+import se1304.androidhardware.R;
 
 public class CameraVideoActivity extends AppCompatActivity{
 

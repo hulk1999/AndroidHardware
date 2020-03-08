@@ -3,6 +3,10 @@
     package="se1304.androidhardware">
 
     <uses-permission android:name="android.hardware.sensor.barometer" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -14,15 +18,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CameraVideoActivity"></activity>
-        <activity android:name=".SensorProximityActivity" />
-        <activity android:name=".SensorAccelerometerActivity" />
-        <activity android:name=".SensorCompassActivity" />
-        <activity android:name=".SensorBarometerActivity" />
-        <activity android:name=".SensorListActivity" />
-        <activity android:name=".CameraClassCapturingActivity" />
-        <activity android:name=".CameraClassActivity" />
-        <activity android:name=".CameraIntentActivity" />
+        <activity android:name=".bluetooth.FileTransferActivity"></activity>
+        <activity android:name=".bluetooth.BluetoothActivity" />
+        <activity android:name=".camera.CameraVideoActivity" />
+        <activity android:name=".sensors.SensorProximityActivity" />
+        <activity android:name=".sensors.SensorAccelerometerActivity" />
+        <activity android:name=".sensors.SensorCompassActivity" />
+        <activity android:name=".sensors.SensorBarometerActivity" />
+        <activity android:name=".sensors.SensorListActivity" />
+        <activity android:name=".camera.CameraClassCapturingActivity" />
+        <activity android:name=".camera.CameraClassActivity" />
+        <activity android:name=".camera.CameraIntentActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,4 +1,4 @@
-package se1304.androidhardware;
+package se1304.androidhardware.sensors;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import java.util.List;
+
+import se1304.androidhardware.R;
 
 public class SensorListActivity extends AppCompatActivity {
 

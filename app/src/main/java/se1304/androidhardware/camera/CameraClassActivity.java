@@ -1,4 +1,4 @@
-package se1304.androidhardware;
+package se1304.androidhardware.camera;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,6 +10,8 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import se1304.androidhardware.R;
 
 public class CameraClassActivity extends AppCompatActivity {
 

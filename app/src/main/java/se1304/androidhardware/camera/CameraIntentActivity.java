@@ -1,4 +1,4 @@
-package se1304.androidhardware;
+package se1304.androidhardware.camera;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,9 +12,10 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.io.File;
+
+import se1304.androidhardware.R;
 
 public class CameraIntentActivity extends AppCompatActivity {
 
